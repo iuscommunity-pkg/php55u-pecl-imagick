@@ -14,7 +14,6 @@ License: PHP
 Group: Development/Libraries
 Source0: http://pecl.php.net/get/%peclName-%{version}.tgz
 Source1: %peclName.ini
-BuildRoot: %{_tmppath}/%{name}-%{version}-root-%(%{__id_u} -n)
 URL: http://pecl.php.net/package/%peclName
 BuildRequires: %{php_base}-pear
 BuildRequires: %{php_base}-devel, %{php_base}-cli, ImageMagick-devel >= 6.2.4
@@ -29,6 +28,7 @@ Requires: %{php_base}-api = %{php_apiver}
 Provides: %{real_name} = %{version}-%{release}
 Conflicts: %{real_name} < %{basever}
 
+
 %description
 %peclName is a native php extension to create and modify images using the
 ImageMagick API. This extension requires ImageMagick version 6.2.4+ and 
@@ -36,17 +36,18 @@ PHP 5.1.3+.
 
 IMPORTANT: Version 2.x API is not compatible with earlier versions.
 
+
 %prep
 %setup -q -n %{peclName}-%{version}
+
 
 %build
 phpize
 %{configure} --with-%peclName
 %{__make}
 
-%install
-rm -rf %{buildroot}
 
+%install
 %{__make} install \
 	INSTALL_ROOT=%{buildroot}
 
@@ -56,8 +57,6 @@ install -m 0664 ../package.xml %{buildroot}%{pecl_xmldir}/%peclName.xml
 install -d %{buildroot}%{_sysconfdir}/php.d/
 install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%peclName.ini
 
-%clean
-rm -rf %{buildroot}
 
 %post
 %if 0%{?pecl_install:1}
@@ -72,7 +71,6 @@ fi
 %endif
 
 %files
-%defattr(-,root,root,-)
 %doc examples CREDITS TODO INSTALL
 %{_libdir}/php/modules/%peclName.so
 %{pecl_xmldir}/%peclName.xml
@@ -80,6 +78,7 @@ fi
 %{_includedir}/php/ext/imagick/php_imagick.h
 %{_includedir}/php/ext/imagick/php_imagick_defs.h
 %{_includedir}/php/ext/imagick/php_imagick_shared.h
+
 
 %changelog
 * Thu Apr 10 2014 Ben Harper <ben.harper@rackspace.com> - 3.1.2-2.ius
