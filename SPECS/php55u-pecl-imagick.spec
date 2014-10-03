@@ -11,7 +11,7 @@
 Summary: Provides a wrapper to the ImageMagick library
 Name: %{php_base}-pecl-%{pecl_name}
 Version: 3.1.2
-Release: 2.ius%{?dist}
+Release: 3.ius%{?dist}
 License: PHP
 Group: Development/Libraries
 Source0: http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
@@ -99,6 +99,12 @@ fi
 
 
 %changelog
+* Fri Oct 03 2014 Carl George <carl.george@rackspace.com> - 3.1.2-3.ius
+- Add numerical prefix to extension configuration file
+- Add filter to avoid private-shared-object-provides
+- Add minimal %%check
+- Remove unneeded header files
+
 * Thu Apr 10 2014 Ben Harper <ben.harper@rackspace.com> - 3.1.2-2.ius
 - porting from php54-pecl-imagick
 
