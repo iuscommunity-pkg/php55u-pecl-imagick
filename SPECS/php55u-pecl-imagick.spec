@@ -28,6 +28,8 @@ Requires: php(api) = %{php_core_api}
 %else
 Requires: %{php_base}-api = %{php_apiver}
 %endif
+Provides: php-pecl(%{pecl_name}) = %{version}
+Provides: %{php_base}-pecl(%{pecl_name}) = %{version}
 Provides: %{real_name} = %{version}-%{release}
 Conflicts: %{real_name} < %{basever}
 
