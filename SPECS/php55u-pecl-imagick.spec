@@ -6,6 +6,7 @@
 %global real_name php-pecl-imagick
 %global php_base php55u
 %global basever 3.1
+%global ini_name  40-%{pecl_name}.ini
 
 Summary: Provides a wrapper to the ImageMagick library
 Name: %{php_base}-pecl-%{pecl_name}
@@ -57,7 +58,7 @@ phpize
 install -m 0755 -d %{buildroot}%{pecl_xmldir}
 install -m 0664 ../package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
 install -d %{buildroot}%{_sysconfdir}/php.d/
-install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{pecl_name}.ini
+install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
 
 
 %post
@@ -78,7 +79,7 @@ fi
 %doc examples CREDITS TODO INSTALL
 %{php_extdir}/%{pecl_name}.so
 %{pecl_xmldir}/%{pecl_name}.xml
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%{pecl_name}.ini
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%{ini_name}
 %{_includedir}/php/ext/imagick/php_imagick.h
 %{_includedir}/php/ext/imagick/php_imagick_defs.h
 %{_includedir}/php/ext/imagick/php_imagick_shared.h
