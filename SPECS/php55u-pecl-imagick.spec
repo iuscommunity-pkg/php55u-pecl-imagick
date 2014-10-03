@@ -2,20 +2,20 @@
 %{!?__pecl: %{expand: %%global __pecl %{_bindir}/pecl}}
 %{!?php_extdir:	%{expand: %%global php_extdir %(php-config --extension-dir)}}
 
-%define	peclName  imagick
-%define real_name php-pecl-imagick
-%define php_base php55u
-%define basever 3.1
+%global pecl_name  imagick
+%global real_name php-pecl-imagick
+%global php_base php55u
+%global basever 3.1
 
 Summary: Provides a wrapper to the ImageMagick library
-Name: %{php_base}-pecl-%peclName
+Name: %{php_base}-pecl-%{pecl_name}
 Version: 3.1.2
 Release: 2.ius%{?dist}
 License: PHP
 Group: Development/Libraries
-Source0: http://pecl.php.net/get/%peclName-%{version}.tgz
-Source1: %peclName.ini
-URL: http://pecl.php.net/package/%peclName
+Source0: http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
+Source1: %{pecl_name}.ini
+URL: http://pecl.php.net/package/%{pecl_name}
 BuildRequires: %{php_base}-pear
 BuildRequires: %{php_base}-devel
 BuildRequires: ImageMagick-devel >= 6.2.4
@@ -32,20 +32,20 @@ Conflicts: %{real_name} < %{basever}
 
 
 %description
-%peclName is a native php extension to create and modify images using the
-ImageMagick API. This extension requires ImageMagick version 6.2.4+ and 
+%{pecl_name} is a native php extension to create and modify images using the
+ImageMagick API. This extension requires ImageMagick version 6.2.4+ and
 PHP 5.1.3+.
 
 IMPORTANT: Version 2.x API is not compatible with earlier versions.
 
 
 %prep
-%setup -q -n %{peclName}-%{version}
+%setup -q -n %{pecl_name}-%{version}
 
 
 %build
 phpize
-%{configure} --with-%peclName
+%{configure} --with-%{pecl_name}
 %{__make}
 
 
@@ -55,28 +55,30 @@ phpize
 
 # Install XML package description
 install -m 0755 -d %{buildroot}%{pecl_xmldir}
-install -m 0664 ../package.xml %{buildroot}%{pecl_xmldir}/%peclName.xml
+install -m 0664 ../package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
 install -d %{buildroot}%{_sysconfdir}/php.d/
-install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%peclName.ini
+install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{pecl_name}.ini
 
 
 %post
 %if 0%{?pecl_install:1}
-%{pecl_install} %{pecl_xmldir}/%peclName.xml
+%{pecl_install} %{pecl_xmldir}/%{pecl_name}.xml
 %endif
+
 
 %postun
 %if 0%{?pecl_uninstall:1}
 if [ "$1" -eq "0" ]; then
-	%{pecl_uninstall} %peclName
+	%{pecl_uninstall} %{pecl_name}
 fi
 %endif
 
+
 %files
 %doc examples CREDITS TODO INSTALL
-%{_libdir}/php/modules/%peclName.so
-%{pecl_xmldir}/%peclName.xml
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%peclName.ini
+%{php_extdir}/%{pecl_name}.so
+%{pecl_xmldir}/%{pecl_name}.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%{pecl_name}.ini
 %{_includedir}/php/ext/imagick/php_imagick.h
 %{_includedir}/php/ext/imagick/php_imagick_defs.h
 %{_includedir}/php/ext/imagick/php_imagick_shared.h
