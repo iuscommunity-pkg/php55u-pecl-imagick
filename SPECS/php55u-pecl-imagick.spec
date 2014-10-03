@@ -1,4 +1,5 @@
-%global	php_apiver %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1) %{!?__pecl: %{expand: %%global __pecl	%{_bindir}/pecl}}
+%global	php_apiver %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
+%{!?__pecl: %{expand: %%global __pecl %{_bindir}/pecl}}
 %{!?php_extdir:	%{expand: %%global php_extdir %(php-config --extension-dir)}}
 
 %define	peclName  imagick
@@ -16,7 +17,8 @@ Source0: http://pecl.php.net/get/%peclName-%{version}.tgz
 Source1: %peclName.ini
 URL: http://pecl.php.net/package/%peclName
 BuildRequires: %{php_base}-pear
-BuildRequires: %{php_base}-devel, %{php_base}-cli, ImageMagick-devel >= 6.2.4
+BuildRequires: %{php_base}-devel
+BuildRequires: ImageMagick-devel >= 6.2.4
 Requires(post):	%{__pecl}
 Requires(postun): %{__pecl}
 %if %{?php_zend_api}0
