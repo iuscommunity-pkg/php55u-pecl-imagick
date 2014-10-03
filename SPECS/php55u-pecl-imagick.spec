@@ -60,6 +60,8 @@ install -m 0664 ../package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
 install -d %{buildroot}%{_sysconfdir}/php.d/
 install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
 
+%{__rm} -rf %{buildroot}/%{_includedir}/php/ext/%peclName/
+
 
 %post
 %if 0%{?pecl_install:1}
@@ -80,9 +82,6 @@ fi
 %{php_extdir}/%{pecl_name}.so
 %{pecl_xmldir}/%{pecl_name}.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%{ini_name}
-%{_includedir}/php/ext/imagick/php_imagick.h
-%{_includedir}/php/ext/imagick/php_imagick_defs.h
-%{_includedir}/php/ext/imagick/php_imagick_shared.h
 
 
 %changelog
