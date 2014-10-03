@@ -65,6 +65,14 @@ install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
 %{__rm} -rf %{buildroot}/%{_includedir}/php/ext/%peclName/
 
 
+%check
+# simple module load test
+php --no-php-ini \
+    --define extension_dir=%{buildroot}%{php_extdir} \
+    --define extension=%{pecl_name}.so \
+    --modules | grep %{pecl_name}
+
+
 %post
 %if 0%{?pecl_install:1}
 %{pecl_install} %{pecl_xmldir}/%{pecl_name}.xml
