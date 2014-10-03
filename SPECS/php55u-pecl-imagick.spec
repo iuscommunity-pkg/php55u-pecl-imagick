@@ -66,7 +66,7 @@ install -m 0664 ../package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
 install -d %{buildroot}%{_sysconfdir}/php.d/
 install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
 
-%{__rm} -rf %{buildroot}/%{_includedir}/php/ext/%peclName/
+%{__rm} -rf %{buildroot}/%{_includedir}/php/ext/%{pecl_name}/
 
 
 %check
