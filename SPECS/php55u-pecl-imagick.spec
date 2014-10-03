@@ -33,6 +33,10 @@ Provides: %{php_base}-pecl(%{pecl_name}) = %{version}
 Provides: %{real_name} = %{version}-%{release}
 Conflicts: %{real_name} < %{basever}
 
+# RPM 4.8
+%{?filter_provides_in: %filter_provides_in %{php_extdir}/.*\.so$}
+%{?filter_setup}
+
 
 %description
 %{pecl_name} is a native php extension to create and modify images using the
