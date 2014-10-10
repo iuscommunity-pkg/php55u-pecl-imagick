@@ -5,7 +5,6 @@
 %global pecl_name  imagick
 %global real_name php-pecl-imagick
 %global php_base php55u
-%global basever 3.1
 %global ini_name  40-%{pecl_name}.ini
 
 Summary: Provides a wrapper to the ImageMagick library
@@ -28,10 +27,18 @@ Requires: php(api) = %{php_core_api}
 %else
 Requires: %{php_base}-api = %{php_apiver}
 %endif
+
+Provides: php-%{pecl_name} = %{version}
+Provides: php-%{pecl_name}%{?_isa} = %{version}
 Provides: php-pecl(%{pecl_name}) = %{version}
+Provides: php-pecl(%{pecl_name})%{?_isa} = %{version}
+Provides: %{php_base}-%{pecl_name} = %{version}
+Provides: %{php_base}-%{pecl_name}%{?_isa} = %{version}
 Provides: %{php_base}-pecl(%{pecl_name}) = %{version}
-Provides: %{real_name} = %{version}-%{release}
-Conflicts: %{real_name} < %{basever}
+Provides: %{php_base}-pecl(%{pecl_name})%{?_isa} = %{version}
+
+Provides: %{real_name} = %{version}
+Conflicts: %{real_name} < %{version}
 
 # RPM 4.8
 %{?filter_provides_in: %filter_provides_in %{php_extdir}/.*\.so$}
