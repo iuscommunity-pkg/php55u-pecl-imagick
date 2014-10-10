@@ -19,8 +19,8 @@ URL: http://pecl.php.net/package/%{pecl_name}
 BuildRequires: %{php_base}-pear
 BuildRequires: %{php_base}-devel
 BuildRequires: ImageMagick-devel >= 6.2.4
-Requires(post):	%{__pecl}
-Requires(postun): %{__pecl}
+Requires(post):	%{php_base}-pear
+Requires(postun): %{php_base}-pear
 %if %{?php_zend_api}0
 Requires: php(zend-abi) = %{php_zend_api}
 Requires: php(api) = %{php_core_api}
