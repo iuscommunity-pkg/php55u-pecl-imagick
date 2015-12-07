@@ -9,8 +9,8 @@
 
 Summary: Provides a wrapper to the ImageMagick library
 Name: %{php_base}-pecl-%{pecl_name}
-Version: 3.1.2
-Release: 5.ius%{?dist}
+Version: 3.3.0
+Release: 1.ius%{?dist}
 License: PHP
 Group: Development/Libraries
 Source0: http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
@@ -99,13 +99,17 @@ fi
 
 
 %files
-%doc examples CREDITS TODO INSTALL
+%doc examples CREDITS
 %{php_extdir}/%{pecl_name}.so
 %{pecl_xmldir}/%{pecl_name}.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%{ini_name}
 
 
 %changelog
+* Mon Dec 07 2015 Ben Harper <ben.harper@rackspace.com> - 3.3.0-1.ius
+- Latest sources from upstream
+- remove TODO and INSTALL from %files
+
 * Tue Jul 28 2015 Ben Harper <ben.harper@rackspace.com> - 3.1.2.-5.ius
 - rebuild for updated ImageMagick in EL 6.7
 
