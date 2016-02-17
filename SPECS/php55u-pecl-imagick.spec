@@ -1,7 +1,3 @@
-%global php_apiver %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
-%{!?__pecl: %{expand: %%global __pecl %{_bindir}/pecl}}
-%{!?php_extdir: %{expand: %%global php_extdir %(php-config --extension-dir)}}
-
 %global pecl_name  imagick
 %global real_name php-pecl-imagick
 %global php_base php55u
@@ -21,12 +17,8 @@ BuildRequires: %{php_base}-devel
 BuildRequires: ImageMagick-devel >= 6.2.4
 Requires(post): %{php_base}-pear
 Requires(postun): %{php_base}-pear
-%if %{?php_zend_api}0
 Requires: php(zend-abi) = %{php_zend_api}
 Requires: php(api) = %{php_core_api}
-%else
-Requires: %{php_base}-api = %{php_apiver}
-%endif
 
 Provides: php-%{pecl_name} = %{version}
 Provides: php-%{pecl_name}%{?_isa} = %{version}
