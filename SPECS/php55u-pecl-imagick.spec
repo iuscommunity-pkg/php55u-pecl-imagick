@@ -52,7 +52,7 @@ IMPORTANT: Version 2.x API is not compatible with earlier versions.
 
 %build
 phpize
-%{configure} --with-%{pecl_name}
+%configure --with-imagick=%{prefix} --with-php-config=%{_bindir}/php-config
 %{__make}
 
 
@@ -101,6 +101,7 @@ fi
 * Wed Feb 17 2016 Carl George <carl.george@rackspace.com> - 3.3.0-2.ius
 - Explicitly require %%{php_base}(api) and %%{php_base}(zend-abi)
 - Manually filter provides only when needed
+- Use standard %%configure line
 
 * Mon Dec 07 2015 Ben Harper <ben.harper@rackspace.com> - 3.3.0-1.ius
 - Latest sources from upstream
