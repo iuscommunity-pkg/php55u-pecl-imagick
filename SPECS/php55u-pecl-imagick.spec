@@ -1,6 +1,6 @@
-%global	php_apiver %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
+%global php_apiver %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
 %{!?__pecl: %{expand: %%global __pecl %{_bindir}/pecl}}
-%{!?php_extdir:	%{expand: %%global php_extdir %(php-config --extension-dir)}}
+%{!?php_extdir: %{expand: %%global php_extdir %(php-config --extension-dir)}}
 
 %global pecl_name  imagick
 %global real_name php-pecl-imagick
@@ -19,7 +19,7 @@ URL: http://pecl.php.net/package/%{pecl_name}
 BuildRequires: %{php_base}-pear
 BuildRequires: %{php_base}-devel
 BuildRequires: ImageMagick-devel >= 6.2.4
-Requires(post):	%{php_base}-pear
+Requires(post): %{php_base}-pear
 Requires(postun): %{php_base}-pear
 %if %{?php_zend_api}0
 Requires: php(zend-abi) = %{php_zend_api}
@@ -64,12 +64,11 @@ phpize
 
 
 %install
-%{__make} install \
-	INSTALL_ROOT=%{buildroot}
+%{__make} install INSTALL_ROOT=%{buildroot}
 
 # Install XML package description
 install -m 0755 -d %{buildroot}%{pecl_xmldir}
-install -m 0664 ../package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
+install -m 0664 package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
 install -d %{buildroot}%{_sysconfdir}/php.d/
 install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
 
@@ -93,7 +92,7 @@ php --no-php-ini \
 %postun
 %if 0%{?pecl_uninstall:1}
 if [ "$1" -eq "0" ]; then
-	%{pecl_uninstall} %{pecl_name}
+  %{pecl_uninstall} %{pecl_name}
 fi
 %endif
 
@@ -172,34 +171,34 @@ fi
 * Sat Jan 3 2009 Pavel Alexeev <Pahan [ at ] Hubbitus [ DOT ] spb [ dOt.] su> - 2.2.1-2
 - License changed to PHP (thanks to Remi Collet)
 - Add -c flag to %%setup (Remi Collet)
-	And accordingly it "cd %%peclName-%%{version}" in %%build and %%install steps.
+  And accordingly it "cd %%peclName-%%{version}" in %%build and %%install steps.
 - Add (from php-pear template)
-	Requires(post):	%%{__pecl}
-	Requires(postun):	%%{__pecl}
+  Requires(post): %%{__pecl}
+  Requires(postun): %%{__pecl}
 - Borrow from Remi Collet php-api/abi requirements.
 - Use macroses: (Remi Collet)
-	%%pecl_install instead of direct "pear install --soft --nobuild --register-only"
-	%%pecl_uninstall instead of pear "uninstall --nodeps --ignore-errors --register-only"
+  %%pecl_install instead of direct "pear install --soft --nobuild --register-only"
+  %%pecl_uninstall instead of pear "uninstall --nodeps --ignore-errors --register-only"
 - %%doc examples/{polygon.php,captcha.php,thumbnail.php,watermark.php} replaced by %%doc examples (Remi Collet)
 - Change few patchs to macroses: (Remi Collet)
-	%%{_libdir}/php/modules - replaced by %%{php_extdir}
-	%%{xmldir} - by %%{pecl_xmldir}
+  %%{_libdir}/php/modules - replaced by %%{php_extdir}
+  %%{xmldir} - by %%{pecl_xmldir}
 - Remove defines of xmldir, peardir.
 - Add 3 recommended macroses from doc http://fedoraproject.org/wiki/Packaging/PHP : php_apiver, __pecl, php_extdir
 
 * Sat Dec 20 2008 Pavel Alexeev <Pahan [ at ] Hubbitus [ DOT ] spb [ dOt.] su> - 2.2.1-1
 - Step to version 2.2.1
 - As prepare to push it into Fedora:
-	- Change release to 1%%{?dist}
-	- Set setup quiet
-	- Escape all %% in changelog section
-	- Delete dot from summary
-	- License change from real "PHP License" to BSD (by example with php-peck-phar and php-pecl-xdebug)
+ - Change release to 1%%{?dist}
+ - Set setup quiet
+ - Escape all %% in changelog section
+ - Delete dot from summary
+ - License change from real "PHP License" to BSD (by example with php-peck-phar and php-pecl-xdebug)
 - %%defattr(-,root,root,-) changed to %%defattr(-,root,root,-)
 
 * Mon May 12 2008 Pavel Alexeev <Pahan [ at ] Hubbitus [ DOT ] spb [ dOt.] su> - 2.2.0b2-0.Hu.0
 - Step to version 2.2.0b2
-- %%define	peclName	imagick and replece to it all direct appearances.
+- %%define peclName imagick and replece to it all direct appearances.
 
 * Thu Mar 6 2008 Pavel Alexeev <Pahan [ at ] Hubbitus [ DOT ] info> - 2.1.1RC1-0.Hu.0
 - Steep to version 2.1.1RC1 -0.Hu.0
