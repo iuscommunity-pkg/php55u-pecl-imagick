@@ -99,9 +99,9 @@ fi
 %changelog
 * Mon Dec 07 2015 Ben Harper <ben.harper@rackspace.com> - 3.3.0-1.ius
 - Latest sources from upstream
-- remove TODO and INSTALL from %files
+- remove TODO and INSTALL from %%files
 
-* Tue Jul 28 2015 Ben Harper <ben.harper@rackspace.com> - 3.1.2.-5.ius
+* Tue Jul 28 2015 Ben Harper <ben.harper@rackspace.com> - 3.1.2-5.ius
 - rebuild for updated ImageMagick in EL 6.7
 
 * Fri Oct 10 2014 Carl George <carl.george@rackspace.com> - 3.1.2-4.ius
@@ -144,7 +144,7 @@ fi
 - Rebuild against php53u-5.3.4
 - BuildRequires: php53u-cli
 
-* Mon Jul 27 2010 BJ Dierkes <wdierkes@rackspace.com> - 3.0.0-1.ius
+* Tue Jul 27 2010 BJ Dierkes <wdierkes@rackspace.com> - 3.0.0-1.ius
 - Latest sources from upstream
 - Porting over to php53 (5.3.3) 
 
