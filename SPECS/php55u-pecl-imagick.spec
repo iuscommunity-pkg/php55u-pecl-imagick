@@ -47,17 +47,19 @@ IMPORTANT: Version 2.x API is not compatible with earlier versions.
 
 
 %prep
-%setup -q -n %{pecl_name}-%{version}
+%setup -q -c
 
+mv %{pecl_name}-%{version} NTS
 
 %build
+cd NTS
 phpize
 %configure --with-imagick=%{prefix} --with-php-config=%{_bindir}/php-config
 %{__make}
 
 
 %install
-%{__make} install INSTALL_ROOT=%{buildroot}
+%{__make} install INSTALL_ROOT=%{buildroot} -C NTS
 
 # Install XML package description
 install -m 0755 -d %{buildroot}%{pecl_xmldir}
@@ -91,7 +93,7 @@ fi
 
 
 %files
-%doc examples CREDITS
+%doc NTS/examples NTS/CREDITS
 %{php_extdir}/%{pecl_name}.so
 %{pecl_xmldir}/%{pecl_name}.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%{ini_name}
