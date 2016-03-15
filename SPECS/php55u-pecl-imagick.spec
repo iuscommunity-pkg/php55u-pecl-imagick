@@ -63,10 +63,10 @@ phpize
 %{__make} install INSTALL_ROOT=%{buildroot} -C NTS
 
 # Install XML package description
-install -m 0755 -d %{buildroot}%{pecl_xmldir}
-install -m 0664 package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
-install -d %{buildroot}%{_sysconfdir}/php.d/
-install -m 0664 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
+install -Dpm 0644 package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
+
+# Install config file
+install -Dpm 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
 
 %{__rm} -rf %{buildroot}/%{_includedir}/php/ext/%{pecl_name}/
 
