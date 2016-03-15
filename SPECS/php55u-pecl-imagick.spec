@@ -5,8 +5,8 @@
 
 Summary: Provides a wrapper to the ImageMagick library
 Name: %{php_base}-pecl-%{pecl_name}
-Version: 3.3.0
-Release: 2.ius%{?dist}
+Version: 3.4.1
+Release: 1.ius%{?dist}
 License: PHP
 Group: Development/Libraries
 Source0: http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
@@ -14,7 +14,8 @@ Source1: %{pecl_name}.ini
 URL: http://pecl.php.net/package/%{pecl_name}
 BuildRequires: %{php_base}-pear
 BuildRequires: %{php_base}-devel
-BuildRequires: ImageMagick-devel >= 6.2.4
+# https://pecl.php.net/package-info.php?package=imagick&version=3.4.0RC2
+BuildRequires: ImageMagick-devel >= 6.5.3.10
 Requires(post): %{php_base}-pear
 Requires(postun): %{php_base}-pear
 Requires: %{php_base}(api) = %{php_core_api}
@@ -100,6 +101,9 @@ fi
 
 
 %changelog
+* Tue Mar 15 2016 Carl George <carl.george@rackspace.com> - 3.4.1-1.ius
+- Latest upstream
+
 * Wed Feb 17 2016 Carl George <carl.george@rackspace.com> - 3.3.0-2.ius
 - Explicitly require %%{php_base}(api) and %%{php_base}(zend-abi)
 - Manually filter provides only when needed
