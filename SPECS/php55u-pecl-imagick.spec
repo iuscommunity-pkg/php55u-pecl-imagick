@@ -1,5 +1,4 @@
 %global pecl_name  imagick
-%global real_name php-pecl-imagick
 %global php_base php55u
 %global ini_name  40-%{pecl_name}.ini
 
@@ -21,17 +20,24 @@ Requires(postun): %{php_base}-pear
 Requires: %{php_base}(api) = %{php_core_api}
 Requires: %{php_base}(zend-abi) = %{php_zend_api}
 
+# provide the stock name
+Provides: php-pecl-%{pecl_name} = %{version}
+Provides: php-pecl-%{pecl_name}%{?_isa} = %{version}
+
+# provide the stock and IUS names without pecl
 Provides: php-%{pecl_name} = %{version}
 Provides: php-%{pecl_name}%{?_isa} = %{version}
-Provides: php-pecl(%{pecl_name}) = %{version}
-Provides: php-pecl(%{pecl_name})%{?_isa} = %{version}
 Provides: %{php_base}-%{pecl_name} = %{version}
 Provides: %{php_base}-%{pecl_name}%{?_isa} = %{version}
+
+# provide the stock and IUS names in pecl() format
+Provides: php-pecl(%{pecl_name}) = %{version}
+Provides: php-pecl(%{pecl_name})%{?_isa} = %{version}
 Provides: %{php_base}-pecl(%{pecl_name}) = %{version}
 Provides: %{php_base}-pecl(%{pecl_name})%{?_isa} = %{version}
 
-Provides: %{real_name} = %{version}
-Conflicts: %{real_name} < %{version}
+# conflict with the stock name
+Conflicts: php-pecl-%{pecl_name} < %{version}
 
 %if 0%{?fedora} < 20 && 0%{?rhel} < 7
 %{?filter_provides_in: %filter_provides_in %{_libdir}/.*\.so$}
@@ -103,6 +109,7 @@ fi
 %changelog
 * Tue Mar 15 2016 Carl George <carl.george@rackspace.com> - 3.4.1-1.ius
 - Latest upstream
+- Clean up provides
 
 * Wed Feb 17 2016 Carl George <carl.george@rackspace.com> - 3.3.0-2.ius
 - Explicitly require %%{php_base}(api) and %%{php_base}(zend-abi)
