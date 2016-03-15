@@ -73,9 +73,9 @@ phpize
 install -Dpm 0644 package.xml %{buildroot}%{pecl_xmldir}/%{pecl_name}.xml
 
 # Install config file
-install -Dpm 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/php.d/%{ini_name}
+install -Dpm 0644 %{SOURCE1} %{buildroot}%{php_inidir}/%{ini_name}
 
-%{__rm} -rf %{buildroot}/%{_includedir}/php/ext/%{pecl_name}/
+rm -rf %{buildroot}%{php_incldir}/ext/%{pecl_name}/
 
 
 %check
@@ -104,7 +104,7 @@ fi
 %doc NTS/examples NTS/CREDITS
 %{php_extdir}/%{pecl_name}.so
 %{pecl_xmldir}/%{pecl_name}.xml
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/php.d/%{ini_name}
+%config(noreplace) %verify(not md5 mtime size) %{php_inidir}/%{ini_name}
 
 
 %changelog
@@ -112,6 +112,7 @@ fi
 - Latest upstream
 - Clean up provides
 - Clean up filters
+- Use standard PHP macros
 
 * Wed Feb 17 2016 Carl George <carl.george@rackspace.com> - 3.3.0-2.ius
 - Explicitly require %%{php_base}(api) and %%{php_base}(zend-abi)
