@@ -39,10 +39,11 @@ Provides: %{php_base}-pecl(%{pecl_name})%{?_isa} = %{version}
 # conflict with the stock name
 Conflicts: php-pecl-%{pecl_name} < %{version}
 
-%if 0%{?fedora} < 20 && 0%{?rhel} < 7
-%{?filter_provides_in: %filter_provides_in %{_libdir}/.*\.so$}
+# RPM 4.8
+%{?filter_provides_in: %filter_provides_in %{php_extdir}/.*\.so$}
 %{?filter_setup}
-%endif
+# RPM 4.9
+%global __provides_exclude_from %{?__provides_exclude_from:%__provides_exclude_from|}%{php_extdir}/.*\\.so$
 
 
 %description
@@ -110,6 +111,7 @@ fi
 * Tue Mar 15 2016 Carl George <carl.george@rackspace.com> - 3.4.1-1.ius
 - Latest upstream
 - Clean up provides
+- Clean up filters
 
 * Wed Feb 17 2016 Carl George <carl.george@rackspace.com> - 3.3.0-2.ius
 - Explicitly require %%{php_base}(api) and %%{php_base}(zend-abi)
